@@ -44,6 +44,10 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       int n = quizBrain.showScore();
       if (quizBrain.checkEnd()) {
+        if (answerr == quizBrain.getAnswer()) {
+          quizBrain.increaseScore();
+          print(quizBrain.showScore());
+        }
         Alert(
             context: context,
             type: AlertType.info,
@@ -57,7 +61,6 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                   onPressed: () {}),
             ]).show();
-        debugPrint('Alert closed now');
         quizBrain.reset();
         scoreKeeper = [];
       } else {
