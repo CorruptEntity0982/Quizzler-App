@@ -43,26 +43,26 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool answerr) {
     setState(() {
       int n = quizBrain.showScore();
-      if (quizBrain.checkEnd()) {
+      if (quizBrain.checkEnd() == true) {
         if (answerr == quizBrain.getAnswer()) {
           quizBrain.increaseScore();
-          print(quizBrain.showScore());
-        }
-        Alert(
-            context: context,
-            type: AlertType.info,
-            title: 'End of Quiz',
-            desc: 'Quiz will be restarted\n Your score is $n',
-            buttons: [
-              DialogButton(
+          Alert(
+              context: context,
+              type: AlertType.info,
+              title: 'End of Quiz',
+              desc: 'Quiz will be restarted\n Your score is $n',
+              buttons: [
+                DialogButton(
+                  onPressed: () => Navigator.pop(context),
                   child: const Text(
                     'Okay',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: () {}),
-            ]).show();
-        quizBrain.reset();
-        scoreKeeper = [];
+                ),
+              ]).show();
+          quizBrain.reset();
+          scoreKeeper = [];
+        }
       } else {
         if (answerr == quizBrain.getAnswer()) {
           quizBrain.increaseScore();
